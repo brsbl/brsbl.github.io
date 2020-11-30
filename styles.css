@@ -1,0 +1,50 @@
+body{
+		margin:0;
+		background-color: #ffffff;
+		font-family: Roboto, Courier New, sans-serif;
+	}
+
+a {
+    color: #6e94ff;
+		text-decoration: none;
+}
+
+a:hover {
+		font-family: Roboto, Courier New, sans-serif;
+		background-color: #ffffa6;
+		color: #000000;
+}
+
+.main-name {
+  position: absolute;
+  margin-left: 75px;
+  margin-top: 50px;
+  font-size: 16pt;
+
+}
+
+.paragraph {
+	line-height: 1.25;
+  position: absolute;
+  margin-left: 75px;
+  margin-top: 100px;
+  width: 35%;
+  font-size: 12pt;
+}
+
+.paragraph em {
+	color: #969696;
+}
+
+.list {
+	line-height: 1.50;
+	margin-left: 15px;
+	font-size: 12pt;
+}
+
+.links {
+  position: absolute;
+	margin-left: 75px;
+	margin-top: 500px;
+	font-size: 10pt;
+}
