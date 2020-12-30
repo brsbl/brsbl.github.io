@@ -31,6 +31,25 @@ a:hover {
   font-size: 12pt;
 }
 
+@media only screen and (max-width: 900px) {
+	.main-name {
+		position: relative;
+	  margin-left: 25px;
+	  margin-top: 50px;
+	  font-size: 14pt;
+
+	}
+
+	.paragraph {
+		position: relative;
+		line-height: 1.25;
+	  margin-left: 25px;
+		margin-top: 10px;
+	  width: 85%;
+	  font-size: 10pt;
+	}
+}
+
 .paragraph em {
 	color: #969696;
 }
