@@ -1,0 +1,25 @@
+{
+  "name": "brsbl.com",
+  "version": "1.0.0",
+  "description": "personal website",
+  "main": "stripe.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "stripe": "^8.129.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "curl -X POST -is \"http://localhost:4242/create-checkout-session\" -d \"\"",
+    "start": "node stripe.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brsbl/brsbl.github.io.git"
+  },
+  "author": "bersabel tadesse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brsbl/brsbl.github.io/issues"
+  },
+  "homepage": "https://github.com/brsbl/brsbl.github.io#readme"
+}
