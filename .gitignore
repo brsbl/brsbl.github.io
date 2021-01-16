@@ -1,0 +1,10 @@
+# dependencies
+
+/node_modules
+
+# secrets
+
+secrets.js
+
+# misc
+.DS_Store
