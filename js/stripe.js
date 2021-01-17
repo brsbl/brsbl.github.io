@@ -21,8 +21,8 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'https://brsbl.com/success.html',
-    cancel_url: 'https://brsbl.com/book.html'
+    success_url: 'https://brsbl.com/pages/success.html',
+    cancel_url: 'https://brsbl.com/pages/book.html'
   });
 
   res.json({ id: session.id });
