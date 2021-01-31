@@ -39,7 +39,7 @@
 					var checkoutButton = document.getElementById('checkout-button');
 
 					checkoutButton.addEventListener('click', function() {
-						fetch('http://localhost:4242/create-checkout-session', {
+						fetch('create-checkout-session', {
 							method: 'POST',
 							mode: 'cors',
 							headers: {
