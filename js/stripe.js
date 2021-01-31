@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
-const secret = require('./secrets.js');
+const secrets = require('./secrets.js');
+const cors = require('cors')
 
 const Stripe = require('stripe');
+// const stripe = Stripe(secret.key);
 const stripe = Stripe(secrets.key);
+
+app.use(cors())
 
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({

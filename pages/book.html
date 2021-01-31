@@ -32,15 +32,20 @@
 					You can order a paperback copy below.
 					<br><br>
 					<div align="center">
-						<button class="button" id="checkout-button">Order</button>
+						<button type"button" class="button" id="checkout-button">Order</button>
 					</div>
 					<script type="text/javascript">
 					var stripe = Stripe('pk_test_51I5guzAiWfgnXePlT4jiw9VufG2HAZf7ZS1jdrKGG3ycxdtF57cn6z2aLj5jUMfRj9nL1eiAJ4pvVBE9to9xlWUb00HvEZM1CZ');
 					var checkoutButton = document.getElementById('checkout-button');
 
 					checkoutButton.addEventListener('click', function() {
-						fetch('/create-checkout-session', {
+						fetch('http://localhost:4242/create-checkout-session', {
 							method: 'POST',
+							mode: 'cors',
+							headers: {
+								'Content-Type': 'application/json',
+								'Access-Control-Allow-Origin': '*'
+				    	}
 						})
 						.then(function(response) {
 							return response.json();
