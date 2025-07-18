@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Spheres on Figma Logo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #2C1B47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            cursor: default;
+        }
+
+        /* Figma Logo Container */
+        .logo-container {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            z-index: 1;
+        }
+
+        /* Figma Logo SVG */
+        .figma-logo {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Base Glass Orb Style */
+        .glass-orb {
+            position: absolute;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.00);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: grab;
+            transition: transform 0.1s ease-out;
+            z-index: 10;
+        }
+
+        .glass-orb:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+
+        .glass-orb.dragging {
+            transition: none;
+        }
+
+        /* Blue Edge Orb */
+        .orb-blue {
+            width: 171px;
+            height: 171px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(100, 200, 255, 0.8),
+                3px 3px 25px 0px rgba(50, 150, 255, 0.6),
+                0px 0px 40px 5px rgba(100, 200, 255, 0.3);
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+
+        /* Orange Edge Orb */
+        .orb-orange {
+            width: 150px;
+            height: 150px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(255, 150, 100, 0.8),
+                3px 3px 25px 0px rgba(255, 100, 50, 0.6),
+                0px 0px 40px 5px rgba(255, 150, 100, 0.3);
+            border: 1px solid rgba(255, 150, 100, 0.2);
+        }
+
+        /* Pink Edge Orb */
+        .orb-pink {
+            width: 140px;
+            height: 140px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(255, 100, 200, 0.8),
+                3px 3px 25px 0px rgba(255, 50, 150, 0.6),
+                0px 0px 40px 5px rgba(255, 100, 200, 0.3);
+            border: 1px solid rgba(255, 100, 200, 0.2);
+        }
+
+        /* Purple Edge Orb */
+        .orb-purple {
+            width: 180px;
+            height: 180px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(200, 100, 255, 0.8),
+                3px 3px 25px 0px rgba(150, 50, 255, 0.6),
+                0px 0px 40px 5px rgba(200, 100, 255, 0.3);
+            border: 1px solid rgba(200, 100, 255, 0.2);
+        }
+
+        /* Green Edge Orb */
+        .orb-green {
+            width: 120px;
+            height: 120px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(100, 255, 150, 0.8),
+                3px 3px 25px 0px rgba(50, 255, 100, 0.6),
+                0px 0px 40px 5px rgba(100, 255, 150, 0.3);
+            border: 1px solid rgba(100, 255, 150, 0.2);
+        }
+
+        /* Yellow Edge Orb */
+        .orb-yellow {
+            width: 160px;
+            height: 160px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(255, 255, 100, 0.8),
+                3px 3px 25px 0px rgba(255, 200, 50, 0.6),
+                0px 0px 40px 5px rgba(255, 255, 100, 0.3);
+            border: 1px solid rgba(255, 255, 100, 0.2);
+        }
+
+        /* Red Edge Orb */
+        .orb-red {
+            width: 130px;
+            height: 130px;
+            box-shadow: 
+                7.862px 5.897px 17.69px 0px rgba(255, 255, 255, 0.65) inset,
+                -3px -3px 25px 0px rgba(255, 100, 100, 0.8),
+                3px 3px 25px 0px rgba(255, 50, 50, 0.6),
+                0px 0px 40px 5px rgba(255, 100, 100, 0.3);
+            border: 1px solid rgba(255, 100, 100, 0.2);
+        }
+
+        /* Idle floating animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .glass-orb:not(.dragging) {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .glass-orb:nth-child(2) { animation-delay: 0.5s; }
+        .glass-orb:nth-child(3) { animation-delay: 1s; }
+        .glass-orb:nth-child(4) { animation-delay: 1.5s; }
+        .glass-orb:nth-child(5) { animation-delay: 2s; }
+        .glass-orb:nth-child(6) { animation-delay: 2.5s; }
+        .glass-orb:nth-child(7) { animation-delay: 3s; }
+    </style>
+</head>
+<body>
+    <!-- Figma Logo -->
+    <div class="logo-container">
+        <svg class="figma-logo" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Figma F Logo created with overlapping shapes -->
+            <g fill="#FFFFFF">
+                <!-- Top left circle -->
+                <path d="M 50 100 A 50 50 0 0 1 100 50 L 100 100 Z"/>
+                <!-- Top right circle -->
+                <path d="M 100 50 A 50 50 0 0 1 150 100 L 100 100 Z"/>
+                <!-- Middle left semi-circle -->
+                <path d="M 50 100 A 50 50 0 0 0 100 150 L 100 100 Z"/>
+                <!-- Middle right full circle -->
+                <circle cx="125" cy="125" r="25"/>
+                <!-- Bottom left rounded rectangle -->
+                <path d="M 50 150 A 50 50 0 0 0 100 200 L 100 250 A 50 50 0 0 1 50 200 Z"/>
+            </g>
+        </svg>
+    </div>
+
+    <!-- Glass Orbs -->
+    <div class="glass-orb orb-blue"></div>
+    <div class="glass-orb orb-orange"></div>
+    <div class="glass-orb orb-pink"></div>
+    <div class="glass-orb orb-purple"></div>
+    <div class="glass-orb orb-green"></div>
+    <div class="glass-orb orb-yellow"></div>
+    <div class="glass-orb orb-red"></div>
+
+    <script>
+        // Initialize orbs with random positions
+        const orbs = document.querySelectorAll('.glass-orb');
+        const bodyRect = document.body.getBoundingClientRect();
+
+        orbs.forEach(orb => {
+            const orbWidth = orb.offsetWidth;
+            const orbHeight = orb.offsetHeight;
+            
+            const maxX = bodyRect.width - orbWidth;
+            const maxY = bodyRect.height - orbHeight;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            orb.style.left = randomX + 'px';
+            orb.style.top = randomY + 'px';
+        });
+
+        // Drag functionality
+        let isDragging = false;
+        let currentOrb = null;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        orbs.forEach(orb => {
+            orb.addEventListener('mousedown', startDrag);
+            orb.addEventListener('touchstart', startDrag, { passive: false });
+        });
+
+        function startDrag(e) {
+            e.preventDefault();
+            isDragging = true;
+            currentOrb = e.currentTarget;
+            currentOrb.classList.add('dragging');
+            
+            const rect = currentOrb.getBoundingClientRect();
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            
+            offsetX = clientX - rect.left - rect.width / 2;
+            offsetY = clientY - rect.top - rect.height / 2;
+            
+            // Bring to front
+            orbs.forEach(o => o.style.zIndex = '10');
+            currentOrb.style.zIndex = '20';
+        }
+
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: false });
+
+        function drag(e) {
+            if (!isDragging || !currentOrb) return;
+            e.preventDefault();
+            
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            
+            const newX = clientX - offsetX - currentOrb.offsetWidth / 2;
+            const newY = clientY - offsetY - currentOrb.offsetHeight / 2;
+            
+            // Keep orb within viewport
+            const maxX = window.innerWidth - currentOrb.offsetWidth;
+            const maxY = window.innerHeight - currentOrb.offsetHeight;
+            
+            currentOrb.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+            currentOrb.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+        }
+
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
+
+        function stopDrag() {
+            if (currentOrb) {
+                currentOrb.classList.remove('dragging');
+            }
+            isDragging = false;
+            currentOrb = null;
+        }
+
+        // Prevent context menu on long press (mobile)
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
